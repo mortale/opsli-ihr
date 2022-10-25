@@ -1,0 +1,143 @@
+[
+    {
+        "id": "0-1-0",
+        "path": "cloud",
+        "name": "cloud",
+        "component": "views/cmdb/cloud",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "Cloud"
+        }
+    },
+    {
+        "id": "0-1-1",
+        "path": "status",
+        "name": "status",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "状态"
+        }
+    },
+    {
+        "id": "0-1-2",
+        "path": "zone",
+        "name": "zone",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "区域"
+        }
+    },
+    {
+        "id": "0-1-3",
+        "path": "environment",
+        "name": "environment",
+        "component": "views/cmdb/environment",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "环境"
+        }
+    },
+    {
+        "id": "0-1-4",
+        "path": "machine",
+        "name": "machine",
+        "component": "views/cmdb/machine",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "服务器"
+        }
+    },
+    {
+        "id": "0-1-5",
+        "path": "modules",
+        "name": "modules",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "功能模块"
+        }
+    },
+    {
+        "id": "0-1-6",
+        "path": "application",
+        "name": "application",
+        "component": "views/cmdb/application",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "应用"
+        }
+    },
+    {
+        "id": "0-1-7",
+        "path": "deployment",
+        "name": "deployment",
+        "component": "views/cmdb/deployment",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "部署详情"
+        }
+    },
+    {
+        "id": "0-1-8",
+        "path": "mix",
+        "name": "mix",
+        "component": "views/cmdb/form",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "混合云"
+        }
+    },
+    {
+        "id": "0-1-9",
+        "path": "archery",
+        "name": "archery",
+        "component": "views/cmdb/archery",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "Archery"
+        }
+    },
+    {
+        "id": "0-1-10",
+        "path": "alb",
+        "name": "alb",
+        "type": "1",
+        "component": "views/cmdb/alb",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "ALB"
+        }
+    },
+    {
+        "id": "0-1-11",
+        "path": "clb",
+        "name": "clb",
+        "component": "views/cmdb/clb",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "CLB"
+        }
+    },
+    {
+        "id": "0-1-12",
+        "path": "deployment-history",
+        "name": "deployment-history",
+        "component": "views/cmdb/deployment-history",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "部署历史"
+        }
+    },
+    {
+        "id": "0-1-13",
+        "path": "docker-version",
+        "name": "docker-version",
+        "component": "views/cmdb/docker-version",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "Docker版本"
+        }
+    }
+]

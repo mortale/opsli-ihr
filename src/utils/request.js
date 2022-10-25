@@ -55,7 +55,7 @@ const handleCode = (code, msg) => {
       break;
     case invalidCode:
       Vue.prototype.$baseMessage(msg || `后端接口${code}异常`, "error");
-      store.dispatch("user/resetAccessToken").catch(() => { });
+      store.dispatch("user/resetAccessToken").catch(() => {});
       if (loginInterception) {
         location.reload();
       }
@@ -64,7 +64,7 @@ const handleCode = (code, msg) => {
       Vue.prototype.$clearDictList();
       break;
     case noPermissionCode:
-      store.dispatch("user/resetAccessToken").catch(() => { });
+      store.dispatch("user/resetAccessToken").catch(() => {});
       if (loginInterception) {
         location.reload();
       }
@@ -72,7 +72,7 @@ const handleCode = (code, msg) => {
       // 清除字典数据
       Vue.prototype.$clearDictList();
 
-      router.push({ path: "/401" }).catch(() => { });
+      router.push({ path: "/401" }).catch(() => {});
       break;
     default:
       Vue.prototype.$baseMessage(msg || `后端接口${code}异常`, "error");
@@ -134,7 +134,7 @@ instance.interceptors.response.use(
       handleCode(code, msg);
       return Promise.reject(
         "OPSLI 请求异常拦截:" +
-        JSON.stringify({ url: config.url, code, msg }) || "Error"
+          JSON.stringify({ url: config.url, code, msg }) || "Error"
       );
     }
   },

@@ -1,76 +1,120 @@
 <script>
-import { getList } from "@/api/alb";
-import TableHeader from "./components/header.vue";
-import TableFooter from "./components/footer.vue";
-import TableMain from "./components/main.vue";
+import dayjs from "dayjs";
 export default {
-  name: "ComprehensiveTable",
+  name: "demo",
   components: {
-    TableHeader,
-    TableFooter,
-    TableMain,
+    TablePage,
   },
   data() {
     return {
-      total: 0,
-      dataSource:[],
-      params: {
-        search: "",
-        page: 1,
-        page_size: 20,
+      form: {
+        net_type: "",
+        cloud: "",
+        name: "",
+        company_name: "",
+        mysql_host: "",
+        staff: 0,
+        module: "",
+        in_charge: "",
+        join_date: "",
+        remark: "",
+      },
+      formRules: {
+        // name: [{ required: true, message: "该字段必填", trigger: "blur" }],
+        // default_dingtalk_url: [
+        //   { required: true, message: "该字段必填", trigger: "blur" },
+        // ],
       },
     };
   },
-  created() {
-    this.fetchData()
-  },
   methods: {
-    updateParams(otherParams,resetPage) {
-        const pageParams = {}
-        if(resetPage){
-            pageParams.page = 1
-        }
-      Object.assign(this.params, otherParams,pageParams);
-      this.fetchData(pageParams)
+    editClick(rowData) {
+      this.dialogTitle = "修改";
+      const { url, created_date, modified_date, Mix_id, ...other } =
+        rowData.row;
+      Object.assign(this.form, other);
+      this.submitFetch = putMix;
+      this.toggleVisible();
     },
-    fetchData() {
-      getList(this.params).then(({code,data})=>{
-          const {count,results} = data
-          this.total = count
-          this.dataSource = results || []
-
-      })
+    toggleVisible() {
+      this.visible = !this.visible;
+    },
+    async sumbit() {
+      const result = await this.$refs.form.validate();
+      if (result) {
+        this.submitFetch(this.form, this.operationId).then((res) => {
+          if (res.code === 200) {
+            this.toggleVisible();
+          }
+        });
+      }
+    },
+    closed() {
+      this.dialogTitle = "创建";
+      Object.assign(this.form, {
+        name: "",
+        default_dingtalk_url: "",
+      });
+      this.submitFetch = postMix;
     },
   },
 };
 </script>
 
-<style scoped>
-.common-layout-container {
-  background-color: #fff;
-  height: 100%;
-}
-</style>
-
 <template>
-  <el-container class="common-layout-container">
-    <el-header>
-      <table-header @updateParams="updateParams"></table-header>
-    </el-header>
-    <el-main class="common-layout-main">
-      <table-main
-      :dataSource="dataSource"
-      ></table-main>
-    </el-main>
-    <el-footer>
-      <table-footer
-        :page="params.page"
-        :page_size="params.page_size"
-        :total="total"
-        @updateParams="updateParams"
-      ></table-footer>
-    </el-footer>
-  </el-container>
+  <el-form
+    :model="form"
+    ref="form"
+    label-position="right"
+    :rules="formRules"
+    label-width="auto"
+    @submit.native.prevent
+    class="cmdb-form"
+  >
+    <el-form-item label="类型 ip" prop="net_type">
+      <el-input v-model="form.net_type" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="Cloud" prop="cloud">
+      <el-select
+        v-model="form.cloud"
+        multiple
+        filterable
+        allow-create
+        default-first-option
+        placeholder="请输入"
+        style="width: 100%"
+      ></el-select>
+    </el-form-item>
+    <el-form-item label="缩写" prop="name">
+      <el-input v-model="form.name" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="公司名称" prop="company_name">
+      <el-input v-model="form.company_name" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="实例" prop="mysql_host">
+      <el-input v-model="form.mysql_host" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="员工数量" prop="staff">
+      <el-input v-model="form.staff" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="使用模块" prop="module">
+      <el-input v-model="form.module" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="负责人" prop="in_charge">
+      <el-input v-model="form.in_charge" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="加入日期" prop="join_date">
+      <el-input v-model="form.join_date" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="Remark" prop="remark">
+      <el-input
+        v-model="form.remark"
+        placeholder="请输入"
+        type="textarea"
+        :rows="5"
+      />
+    </el-form-item>
+  </el-form>
 </template>
 
 

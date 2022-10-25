@@ -1,0 +1,42 @@
+[
+    {
+        "id": "0-2-0",
+        "path": "mission",
+        "name": "mission",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "应用发布"
+        }
+    },
+    {
+        "id": "0-2-1",
+        "path": "progress",
+        "name": "progress",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "执行主机"
+        }
+    },
+    {
+        "id": "0-2-2",
+        "path": "jenkins-history",
+        "name": "jenkins-history",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "构建任务"
+        }
+    },
+    {
+        "id": "0-2-3",
+        "path": "private-mission",
+        "name": "private-mission",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "私有云发布"
+        }
+    }
+]

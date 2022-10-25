@@ -9,7 +9,7 @@ const data = [
         name: "Index",
         component: "views/index/index",
         meta: {
-          title: "Dashboard",
+          title: "首页",
           icon: "home",
           affix: true,
         },

@@ -1,8 +1,12 @@
 <script>
 import dayjs from "dayjs";
+import { getAlb } from "@/api/cmdb/alb";
+import TablePage from "./components/tablePage.vue";
 export default {
-  name: "TableMain",
-  props: ["dataSource"],
+  name: "alb",
+  components: {
+    TablePage,
+  },
   created() {
     const closePopover = () => {
       const result = !this.popoverShow;
@@ -23,6 +27,7 @@ export default {
       },
       popoverContent: {},
       popoverShow: false,
+      fetch: getAlb,
       tableColumns: [
         // { label: "ID", columnName: "id" },
         { label: "Zone", columnName: "zone", align: "center" },
@@ -55,16 +60,6 @@ export default {
     };
   },
   methods: {
-    copyClick() {
-      const inputTest = document.getElementById("copy-container");
-      inputTest.value = this.popoverContent.url;
-      inputTest.select();
-      try {
-        document.execCommand("copy");
-      } catch (error) {
-        console.log(error);
-      }
-    },
     rowClick(row, column, event) {
       this.popoverContent = {
         ...row,
@@ -77,12 +72,23 @@ export default {
         this.popoverShow = true;
       }
     },
+    copyClick() {
+      const inputTest = document.getElementById("copy-container");
+      inputTest.value = this.popoverContent.url;
+      inputTest.select();
+      try {
+        document.execCommand("copy");
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
+
 <template>
   <div style="height: 100%">
-    <el-popover
+    <!-- <el-popover
       :popper-options="{ boundariesElement: 'viewport' }"
       :style="popoverPosition"
       :value="popoverShow"
@@ -118,22 +124,14 @@ export default {
           @click="copyClick"
         ></el-button>
       </div>
-    </el-popover>
-    <el-table :data="dataSource" height="100%" @row-click="rowClick">
-      <template v-for="item in tableColumns">
-        <el-table-column
-          :prop="item.columnName"
-          :key="item.columnName"
-          :label="item.label"
-          :formatter="item.formatter"
-          :align="item.align"
-        >
-          <!-- <template slot-scope="scope">
-         <span>{{scope.row[item.columnName]}}</span>
-      </template> -->
-        </el-table-column>
-      </template>
-    </el-table>
+    </el-popover> -->
+    <table-page
+      :tableColumns="tableColumns"
+      :fetch="fetch"
+      @row-click="rowClick"
+    ></table-page>
   </div>
 </template>
 
+
+ 

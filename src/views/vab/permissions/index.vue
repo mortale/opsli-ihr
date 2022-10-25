@@ -117,50 +117,47 @@
 </template>
 
 <script>
-  import { mapGetters } from "vuex";
-  import { tokenTableName } from "@/config/settings";
-  import { getRouterList } from "@/api/router";
-  import JsonEditor from "@/components/JsonEditor";
+import { mapGetters } from "vuex";
+import { tokenTableName } from "@/config/settings";
+import { getRouterList } from "@/api/router";
+import JsonEditor from "@/components/JsonEditor";
 
-  export default {
-    name: "Permissions",
-    components: {
-      JsonEditor,
-    },
-    data() {
-      return {
-        form: {
-          account: "",
-        },
-        tableData: [],
-        res: [],
-      };
-    },
-    computed: {
-      ...mapGetters({
-        username: "user/username",
-        permissions: "user/permissions",
-      }),
-    },
-    created() {
-      this.fetchData();
-    },
-    mounted() {
-      this.form.account = this.username;
-    },
-    methods: {
-      handleChangePermission() {
-        localStorage.setItem(
-          tokenTableName,
-          `${this.form.account}-accessToken`
-        );
-        location.reload();
+export default {
+  name: "Permissions",
+  components: {
+    JsonEditor,
+  },
+  data() {
+    return {
+      form: {
+        account: "",
       },
-      async fetchData() {
-        const res = await getRouterList();
-        this.tableData = res.data;
-        this.res = res;
-      },
+      tableData: [],
+      res: [],
+    };
+  },
+  computed: {
+    ...mapGetters({
+      username: "user/username",
+      permissions: "user/permissions",
+    }),
+  },
+  created() {
+    this.fetchData();
+  },
+  mounted() {
+    this.form.account = this.username;
+  },
+  methods: {
+    handleChangePermission() {
+      localStorage.setItem(tokenTableName, `${this.form.account}-accessToken`);
+      location.reload();
     },
-  };
+    async fetchData() {
+      const res = await getRouterList();
+      this.tableData = res.data;
+      this.res = res;
+    },
+  },
+};
 </script>

@@ -1,0 +1,52 @@
+[
+    {
+        "id": "0-3-0",
+        "path": "todo-mission",
+        "name": "todo-mission",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "待发任务"
+        }
+    },
+    {
+        "id": "0-3-1",
+        "path": "publish-order",
+        "name": "publish-order",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "上线单"
+        }
+    },
+    {
+        "id": "0-3-2",
+        "path": "datafix",
+        "name": "datafix",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "Datafix"
+        }
+    },
+    {
+        "id": "0-3-3",
+        "path": "app",
+        "name": "app",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "应用版本"
+        }
+    },
+    {
+        "id": "0-3-4",
+        "path": "history",
+        "name": "history",
+        "component": "views/index/index",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "版本历史"
+        }
+    }
+]

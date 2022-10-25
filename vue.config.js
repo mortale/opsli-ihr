@@ -74,7 +74,7 @@ module.exports = {
         pathRewrite: { "^/ops-test": "" },
       },
     },
-    after: mockServer(),
+    // after: mockServer(),
   },
   configureWebpack() {
     return {
@@ -185,7 +185,7 @@ module.exports = {
       //         name: "static/img/[name].[hash:8].[ext]"
       //         // 从生成的资源覆写 filename 或 chunkFilename 时，`assetsDir` 会被忽略。
       //         // 因此别忘了在前面加上静态资源目录，即assetsDir指定的目录，不然会直接在dist文件夹下
-      //         // outputPath: 'static/img' 
+      //         // outputPath: 'static/img'
       //       }
       //     }
       // }))
@@ -228,6 +228,11 @@ module.exports = {
       scss: {
         /*sass-loader 8.0语法 */
         //prependData: '@import "~@/styles/variables.scss";',
+        sassOptions: {
+          prependData: `
+         
+             `,
+        },
 
         /*sass-loader 9.0写法，感谢github用户 shaonialife*/
         additionalData(content, loaderContext) {
@@ -236,7 +241,11 @@ module.exports = {
           if (
             relativePath.replace(/\\/g, "/") !== "src/styles/variables.scss"
           ) {
-            return '@import "~@/styles/variables.scss";' + content;
+            if (relativePath.replace(/\\/g, "/").match(/@formily/)) {
+              return content;
+            } else {
+              return `@import "~@/styles/variables.scss";` + content;
+            }
           }
           return content;
         },
