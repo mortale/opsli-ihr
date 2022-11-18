@@ -37,14 +37,6 @@ const resolve = (dir) => {
   return path.join(__dirname, dir);
 };
 
-const mockServer = () => {
-  if (process.env.NODE_ENV === "development") {
-    return require("./mock/mockServer.js");
-  } else {
-    return "";
-  }
-};
-
 module.exports = {
   publicPath,
   assetsDir,

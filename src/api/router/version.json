@@ -48,5 +48,15 @@
         "meta": {
             "title": "版本历史"
         }
+    },
+    {
+        "id": "0-3-5",
+        "path": "management",
+        "name": "management",
+        "component": "views/version/management",
+        "alwaysShow": "0",
+        "meta": {
+            "title": "迭代管理"
+        }
     }
 ]

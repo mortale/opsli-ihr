@@ -1,78 +1,28 @@
-#
-
-<div align="center"><img width="200" src="https://gitee.com/chu1204505056/vue-admin-beautiful/raw/master/src/colorfulIcon/svg/vab.svg"/>
-<h1> vue-admin-beautiful </h1>
-<h3>一款基于 vue+element-ui 的绝佳的通用型、中后台前端框架</h3>
-<h3>An excellent general-purpose, middle and background front-end framework based on Vue + element UI</h3>
-</div>
-
-![image](https://repository-images.githubusercontent.com/249342059/8ff9d000-bef5-11ea-837f-8c265b79e3db)
-
-## vue-admin-beautiful 前端讨论群-1 972435319
-
-不管您加或者不加，您都可以享受到开源的代码，感谢您的支持和信任，群内提供 vue-admin-beautiful-template 基础版本和详细的基础使用文档适合框架快速入门
-
-![img](https://gitee.com/chu1204505056/vabBooks/raw/gh-pages/img/ewm.png)
-
-## 🎉🎉🎉 基于 vue3.0 的 vue-admin-beautiful-mini 正在快马加鞭的开发，敬请期待！！！
-
-## 地址
-
-### - [🎉 演示地址 1：vue-admin-beautiful](http://beautiful.panm.cn/vue-admin-beautiful/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-### - [🎉 演示地址 2：vue-admin-beautiful：vue-admin-beautiful](https://chu1204505056.gitee.io/vue-admin-beautiful/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-### - [🚀 pro 版演示地址 1：vue-admin-beautiful-pro](http://beautiful.panm.cn/vue-admin-beautiful-pro/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-### - [🚀 pro 版演示地址 2：vue-admin-beautiful-pro](https://chu1204505056.gitee.io/vue-admin-beautiful-pro/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-### - [🌐 github 仓库地址](https://github.com/chuzhixin/vue-admin-beautiful/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-### - [🌐 码云仓库地址](https://gitee.com/chu1204505056/vue-admin-beautiful/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-### - [🌐 vue3.0 版本研发进度展示（基础版本已全部贯通、适配电脑、手机、平板）](https://chu1204505056.gitee.io/vue-admin-beautiful-mini/?hmsr=github&hmpl=&hmcu=&hmkw=&hmci=)
-
-## 安装
+## 依赖
 
 ```bash
-# 克隆项目
-git clone https://github.com/chuzhixin/vue-admin-beautiful.git
-# 进入项目目录
-cd vue-admin-beautiful
 # 安装依赖
 npm i
+```
+
+## 本地启动
+
+```bash
 # 本地开发 启动项目
 npm run serve
 ```
 
-## install
+## 打包
 
 ```bash
-# Clone project
-git clone https://github.com/chuzhixin/vue-admin-beautiful.git
-# Enter project directory
-cd vue-admin-beautiful
-# Installation dependency
-npm i
-# Start project
-npm run serve
+
+ npm run build
 ```
-
-## 友情链接
-
-### - [uView 文档（超棒的移动跨端框架，文档详细，上手容易）](https://uviewui.com/)
-
-### - [Element UI 表单设计及代码生成器（可视化表单设计器，一键生成 element 表单）](https://github.com/JakHuang/form-generator/)
-
-### - [luch-request（基于 Promise 开发的 uni-app 跨平台、项目级别的请求库，它有更小的体积，易用的 api，方便简单的自定义能力）](https://www.quanzhan.co/luch-request/)
-
-### - [umyui 文档（开发者准备的基于 Vue 2.0 的桌面端组件库; 流畅渲染表格万级数据）](http://www.umyui.com/)
 
 ## setting.js 配置
 
 - 说明：这里有好多你会用到的配置项。
 - 位置：src/config/settings.js
-- 注意：此处可能不是最新代码具体可查看[github 最新的 settings.js 配置](https://github.com/chuzhixin/vue-admin-beautiful/blob/master/src/config/settings.js)
 - 示例代码：
 
 ```js
@@ -181,7 +131,6 @@ module.exports = {
 
 - 说明：这里可以修改你项目的配色方案，简单修改即可实现风格大变。
 - 位置：src/styles/variables.scss
-- 注意：此处可能不是最新代码具体可查看[github 最新的 variables.scss 配置](https://github.com/chuzhixin/vue-admin-beautiful/blob/master/src/styles/variables.scss)
 
 ```scss
 /**
@@ -276,46 +225,56 @@ $base-transition-time: 0.2s;
 }
 ```
 
-## element-ui 组件尺寸配置
+## 路由配置
 
-- 说明：这里可以修改你 element-ui 组件尺寸，element-ui 组件的尺寸一共分为 large、default、small 、mini，本项目默认使用的是 small。
-- 位置：src/plugins/element.js
-- 示例代码：
+- 说明：这里可以修改你项目的路由。
+- 位置：src/api/router/index 根路由/ 以及子路由 XXXX
+  子路由参考 src/api/router/cmdb.json
 
-```js
-import Vue from "vue";
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/display.css";
+  单个具体路由配置
+  iterface IRouter {
+  id: "0-0", //唯一键
+  name: "dashboard", //名称
+  path: "dashboard", //地址栏路径
+  component: "views/index/index", //对应的 vue 文件位置
+  meta: {
+  title: "Dashboard", //其他配置
+  },
+  children?: IRouter[] //子路由配置项
+  }
 
-import "@/styles/element-variables.scss";
+## 权限
 
-Vue.use(ElementUI, {
-  size: "small", // element-ui组件的尺寸一共分为large、default、small 、mini
-});
-```
+说明：这里可以修改你项目的路由权限。
 
-## 付费技术支持，商务合作
+- 位置：src/api/auth/index
 
-### 联系：QQ 1204505056
+  路由对应的可见权限，数组填充对应的角色
 
-## 捐赠
+## 表格配置
 
-![img](https://chu1204505056.gitee.io/vabBooks/img/donation.png)
+参考样例 deployment-history
 
-#### github 标星增长量统计
+- 位置：src\views\cmdb\deployment-history.vue
 
-[![Stargazers over time](https://starcharts.herokuapp.com/chuzhixin/vue-admin-beautiful.svg)](https://github.com/chuzhixin/vue-admin-beautiful)
-
-#### 开发者评级
-
-[![chuzhixin's github stats](https://github-readme-stats.vercel.app/api?username=chuzhixin)](https://github.com/chuzhixin/vue-admin-beautiful)
-
-## 关于框架的声明
-
-框架在保留作者版权信息的前提下可免费用于商业使用，框架所有代码包含 npm 包中的源码内容均为免费开放，如果您愿意支持我、或者希望完全变成自己的版权信息，需支付 299 元，如果您愿意加入 VIP 群学习需支付 100 元，这一切都是在您自愿的基础上，如果您觉得框架一文不值，请直接略过，高抬贵手放我一马，不要恶意刷差评，希望每个使用 vue-admin-beautiful 的人无论过程怎样，结局都是美好的，联系方式 QQ 1204505056
-
-## vue-admin-beautiful 前端讨论群-2 1139183756
-
-不管您加或者不加，您都可以享受到开源的代码，感谢您的支持和信任，群内提供 vue-admin-beautiful-template 基础版本和详细的基础使用文档适合框架快速入门
-
-![img](https://gitee.com/chu1204505056/vabBooks/raw/gh-pages/img/ewm_2.png)
+表格列属性配置
+tableColumns:[
+  { // 基础属性
+    label: "Zone", // 标题
+    columnName: "zone", // 对应的接口字段名
+    align: "center" , // 内容布局
+  },
+  { // 操作列
+    label: "操作",
+    align: "center",
+    type: "operator", // 操作列必穿属性
+    operators: [ // 按钮的属性数据
+      { // 一个按钮
+        key: "edit",
+        type: "text",
+        text: "修改", 
+        click: this.editClick //自定义点击事件
+      },
+    ],
+  },
+]

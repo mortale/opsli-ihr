@@ -13,7 +13,7 @@
         "id": "0-1-1",
         "path": "status",
         "name": "status",
-        "component": "views/index/index",
+        "component": "views/cmdb/status",
         "alwaysShow": "0",
         "meta": {
             "title": "状态"
@@ -83,7 +83,7 @@
         "id": "0-1-8",
         "path": "mix",
         "name": "mix",
-        "component": "views/cmdb/form",
+        "component": "views/cmdb/mix",
         "alwaysShow": "0",
         "meta": {
             "title": "混合云"

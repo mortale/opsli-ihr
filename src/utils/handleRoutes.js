@@ -1,3 +1,5 @@
+import store from "@/store";
+
 const dict = {
   0: false,
   1: true,
@@ -58,7 +60,11 @@ export function filterAllRoutes(constantRoutes) {
  * @param route
  * @returns {boolean|*}
  */
-function hasPermission(permissions, route) {
+function hasPermission(permissions, route, currentPath) {
+  // const roles = store.getters["user/accessToken"]
+  // if(roles)
+  // if (!permissions[currentPath]) return true;
+
   if (route.meta && route.meta.permissions) {
     return permissions.some((role) => route.meta.permissions.includes(role));
   } else {
@@ -73,13 +79,18 @@ function hasPermission(permissions, route) {
  * @param permissions
  * @returns {[]}
  */
-export function filterAsyncRoutes(routes, permissions) {
+export function filterAsyncRoutes(routes, permissions, perPath = "") {
   const finallyRoutes = [];
   routes.forEach((route) => {
     const item = { ...route };
-    if (hasPermission(permissions, item)) {
+    const curentPath = perPath + route.path;
+    if (hasPermission(permissions, item, curentPath)) {
       if (item.children) {
-        item.children = filterAsyncRoutes(item.children, permissions);
+        item.children = filterAsyncRoutes(
+          item.children,
+          permissions,
+          curentPath + (perPath ? "/" : "")
+        );
       }
       finallyRoutes.push(item);
     }

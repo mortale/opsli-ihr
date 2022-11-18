@@ -26,7 +26,7 @@ const rootRouterConfig = [
     id: "0-2",
     path: "publish",
     name: "publish",
-    component: "views/index/index",
+    component: "EmptyLayout",
     alwaysShow: "1",
     meta: {
       title: "发布",
@@ -37,7 +37,7 @@ const rootRouterConfig = [
     id: "0-3",
     path: "version",
     name: "version",
-    component: "views/index/index",
+    component: "EmptyLayout",
     alwaysShow: "1",
     meta: {
       title: "版本管理",

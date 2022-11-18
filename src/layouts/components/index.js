@@ -9,7 +9,6 @@ export { default as VabPermissions } from "zx-layouts/Permissions";
 export { default as VabQueryForm } from "zx-layouts/VabQueryForm/export";
 export { default as Logo } from "zx-layouts/Logo";
 export { default as Avatar } from "zx-layouts/Avatar";
-export { default as Ad } from "./Ad";
 export { default as AppMain } from "zx-layouts/AppMain";
 export { default as TagsBar } from "zx-layouts/TagsBar";
 export { default as SideBar } from "zx-layouts/SideBar";

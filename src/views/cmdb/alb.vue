@@ -88,43 +88,6 @@ export default {
 
 <template>
   <div style="height: 100%">
-    <!-- <el-popover
-      :popper-options="{ boundariesElement: 'viewport' }"
-      :style="popoverPosition"
-      :value="popoverShow"
-      :width="600"
-      trigger="manual"
-    >
-      <div
-        style="
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-        "
-      >
-        <div>
-          <span>{{ popoverContent.app }}：</span>
-          <el-link type="success" :underline="false" :href="popoverContent.url">
-            {{ popoverContent.url }}
-          </el-link>
-          <br />
-          <span>hosts：</span>
-          <el-link type="success" :underline="false">
-            {{ popoverContent.hosts }}
-          </el-link>
-        </div>
-        <input
-          type="text"
-          id="copy-container"
-          style="width: 1px; height: 0; padding: 0; border: 0; flex: 0 0"
-        />
-        <el-button
-          icon="el-icon-document-copy"
-          type="text"
-          @click="copyClick"
-        ></el-button>
-      </div>
-    </el-popover> -->
     <table-page
       :tableColumns="tableColumns"
       :fetch="fetch"
