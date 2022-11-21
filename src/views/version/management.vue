@@ -13,6 +13,31 @@ import {
 import dayjs from "dayjs";
 import TablePage from "../cmdb/components/tablePage.vue";
 
+const fetchOptions = (sign) => {
+  const fakeOptions = {
+    1: [
+      {
+        label: "应用发布",
+        value: 1,
+      },
+    ],
+    2: [
+      {
+        label: "mgirate",
+        value: 2,
+      },
+    ],
+    3: [
+      {
+        label: "datafix",
+        value: 3,
+      },
+    ],
+  };
+  const result = Promise.resolve(fakeOptions[sign] || []);
+  return result;
+};
+
 const SchemaField = createSchemaField({
   components: {
     FormLayout,
@@ -22,6 +47,9 @@ const SchemaField = createSchemaField({
     Select,
     ArrayCollapse,
     FormGrid,
+  },
+  scope: {
+    fetchOptions,
   },
 });
 export default {
@@ -58,6 +86,9 @@ export default {
               "x-component": "Input",
               "x-decorator": "FormItem",
               title: "迭代号",
+              "x-component-props": {
+                disabled: true,
+              },
             },
           },
         },
@@ -109,12 +140,11 @@ export default {
                     title: "select2",
                     "x-decorator": "FormItem",
                     "x-component": "Select",
+                    enum: [],
                     "x-reactions": {
                       dependencies: [".input"],
                       fulfill: {
-                        schema: {
-                          enum: "{{$deps[0] === 1?[{label:1,value:1}]:[]}}",
-                        },
+                        run: "fetchOptions($deps[0]).then((res) => {$self.dataSource = res})",
                       },
                     },
                   },
@@ -191,6 +221,8 @@ export default {
   methods: {
     editClick(rowData) {
       this.toggleVisible1();
+      const {} = rowData.row
+      // form.setValues()
     },
 
     toggleVisible1() {
@@ -207,9 +239,9 @@ export default {
 <template>
   <div style="height: 100%">
     <table-page :tableColumns="tableColumns" :fetch="fetch">
-      <template #HeaderLeft>
+      <!-- <template #HeaderLeft>
         <el-button type="primary" @click="toggleVisible">创建</el-button>
-      </template>
+      </template> -->
 
       <el-dialog title="部署步骤" :visible.sync="visible1" @closed="closed">
         <FormProvider :form="form">

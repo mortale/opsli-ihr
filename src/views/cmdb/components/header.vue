@@ -35,7 +35,9 @@ export default {
   },
   methods: {
     handleQuery() {
-      this.$emit("updateParams", this.queryForm, true);
+      try {
+        this.$emit("updateParams", this.queryForm, true);
+      } catch (error) {}
     },
   },
 };
