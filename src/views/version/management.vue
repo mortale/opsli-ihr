@@ -82,7 +82,7 @@ export default {
             columnGap: 16,
           },
           properties: {
-            input: {
+            id: {
               "x-component": "Input",
               "x-decorator": "FormItem",
               title: "迭代号",
@@ -92,7 +92,7 @@ export default {
             },
           },
         },
-        string_array: {
+        data: {
           type: "array",
           "x-component": "ArrayCollapse",
           "x-decorator": "FormItem",
@@ -115,27 +115,27 @@ export default {
                   columnGap: 16,
                 },
                 properties: {
-                  input: {
+                  act: {
                     type: "string",
                     title: "select1",
                     enum: [
                       {
                         label: "应用发布",
-                        value: 1,
+                        value: "publish",
                       },
                       {
                         label: "mgirate",
-                        value: 2,
+                        value: "mgirate",
                       },
                       {
                         label: "datafix",
-                        value: 3,
+                        value: "datafix",
                       },
                     ],
                     "x-decorator": "FormItem",
                     "x-component": "Select",
                   },
-                  input2: {
+                  apps: {
                     type: "string",
                     title: "select2",
                     "x-decorator": "FormItem",
@@ -221,7 +221,7 @@ export default {
   methods: {
     editClick(rowData) {
       this.toggleVisible1();
-      const {} = rowData.row
+      const { id } = rowData.row;
       // form.setValues()
     },
 

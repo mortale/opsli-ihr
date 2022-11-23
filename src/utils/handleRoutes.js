@@ -61,14 +61,11 @@ export function filterAllRoutes(constantRoutes) {
  * @returns {boolean|*}
  */
 function hasPermission(permissions, route, currentPath) {
-  // const roles = store.getters["user/accessToken"]
-  // if(roles)
-  // if (!permissions[currentPath]) return true;
-
-  if (route.meta && route.meta.permissions) {
-    return permissions.some((role) => route.meta.permissions.includes(role));
-  } else {
-    return true;
+  if (route.path === "/") return true;
+  const roles = store.getters["user/accessToken"].split(".");
+  if (roles?.length) {
+    const pathAuths = permissions[currentPath] || [];
+    return roles.some((el) => pathAuths.includes(el));
   }
 }
 
