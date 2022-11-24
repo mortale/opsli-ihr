@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import api, { headers } from "./api";
+import api, { headers } from "../api";
 const { baseOpsTestUrl } = require("@/config/settings");
 
 export function getMachine(params) {

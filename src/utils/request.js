@@ -84,7 +84,7 @@ const instance = axios.create({
   baseURL,
   timeout: requestTimeout,
   headers: {
-    "Content-Type": contentType,
+    "Content-Type": contentType || "application/json",
   },
 });
 
@@ -110,6 +110,7 @@ instance.interceptors.request.use(
     if (needLoading(config)) {
       loadingInstance = Vue.prototype.$baseLoading();
     }
+
     return config;
   },
   (error) => {

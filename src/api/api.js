@@ -10,6 +10,7 @@ const api = Object.freeze({
   clb: "/api-v2/cmdb/clb/",
   deploymentHistory: "/api-v2/cmdb/deployment-history/",
   dockerVersion: "/api-v2/cmdb/docker-version/",
+  sprint: "/api-v2/version/sprint/",
 });
 
 export const headers = {
