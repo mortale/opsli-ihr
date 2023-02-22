@@ -42,3 +42,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" >
+.vab-query-form {
+  margin-bottom: 0 !important;
+}
+</style>

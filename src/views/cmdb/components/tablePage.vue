@@ -44,7 +44,9 @@ export default {
       });
     },
     rowClick(row, event, column) {
-      this.$emit("row-click", row, event, column);
+      try {
+        this.$emit("row-click", row, event, column);
+      } catch {}
     },
   },
 };

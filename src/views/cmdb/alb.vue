@@ -7,41 +7,20 @@ export default {
   components: {
     TablePage,
   },
-  created() {
-    const closePopover = () => {
-      const result = !this.popoverShow;
-      this.popoverShow = false;
-      return result;
-    };
-    document.oncontextmenu = function (e) {
-      return closePopover();
-    };
-  },
   data() {
     return {
-      popoverPosition: {
-        position: "fixed",
-        "z-index": 100,
-        top: "100px",
-        left: "100px",
-      },
-      popoverContent: {},
-      popoverShow: false,
       fetch: getAlb,
       tableColumns: [
-        // { label: "ID", columnName: "id" },
         { label: "Zone", columnName: "zone", align: "center" },
         { label: "App", columnName: "app", align: "center" },
         { label: "listener_id", columnName: "listener_id", align: "center" },
         { label: "group_id", columnName: "group_id", align: "center" },
-        // {label:"Port",columnName:"id"},
         {
           label: "Status",
           columnName: "current_status",
           formatter: (row, column, cellValue, index) => cellValue?.toString(),
           align: "center",
         },
-        // {label:"Console",columnName:"id"},
         {
           label: "创建日期",
           columnName: "created_date",
@@ -56,31 +35,20 @@ export default {
             dayjs(cellValue).format("YYYY-M-D HH:mm:ss"),
           align: "center",
         },
+        {
+          label: "操作",
+          align: "center",
+          type: "operator",
+          operators: [ "edit","delete"],
+        },
       ],
     };
   },
   methods: {
-    rowClick(row, column, event) {
-      this.popoverContent = {
-        ...row,
-        hosts: row.deployments.map((el) => el.host).toString(),
-      };
-      const x = event.clientX > 600 ? event.clientX - 600 : event.clientX;
-      this.popoverPosition.top = event.clientY + "px";
-      this.popoverPosition.left = x + "px";
-      if (!this.popoverShow) {
-        this.popoverShow = true;
-      }
+    editClick() {
+      console.log('edit')
     },
-    copyClick() {
-      const inputTest = document.getElementById("copy-container");
-      inputTest.value = this.popoverContent.url;
-      inputTest.select();
-      try {
-        document.execCommand("copy");
-      } catch (error) {
-        console.log(error);
-      }
+    rowClick(row, column, event) {
     },
   },
 };
@@ -92,7 +60,11 @@ export default {
       :tableColumns="tableColumns"
       :fetch="fetch"
       @row-click="rowClick"
-    ></table-page>
+    >
+    <template #HeaderLeft>
+      <el-button type="primary" @click="toggleVisible">创建</el-button>
+    </template>
+    </table-page>
   </div>
 </template>
 
