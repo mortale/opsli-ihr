@@ -2,19 +2,48 @@
 import TableHeader from "./header.vue";
 import TableFooter from "./footer.vue";
 import TableMain from "./main.vue";
+import FormModal from './form-modal.vue'
+import {getFunctionAuth} from '../../../api/auth/function'
+const cacheCite = {}
+let freeze = false
+// 使用接口冻结
+const useFreezeFetch = () => {
+  freeze = true
+}
+// 回复接口启用
+const closeFreezeFetch = () => {
+  freeze = false
+}
 export default {
   name: "ComprehensiveTable",
   props: {
     fetch: Function,
     tableColumns: Array,
+    operators: Array,
+    schema: Object,
   },
   components: {
     TableHeader,
     TableFooter,
     TableMain,
+    FormModal
   },
   data() {
+
+  const _operators = this.operators ?? []
+  const create =this.auths.includes('create') &&  _operators.includes('create')
+  const rowOperators = _operators.filter((el) => this.auths.includes(el) && el !== 'create')
+  const needRefersh = _operators.includes('refersh')
     return {
+      auths: [],
+      needRefersh,
+      refersh:false,
+      title: '',
+      okText: '确定',
+      type:'',
+      visible:false,
+      create,
+      rowOperators,
       total: 0,
       dataSource: [],
       params: {
@@ -24,30 +53,155 @@ export default {
       },
     };
   },
+  beforeCreate() {
+    this.auths = getFunctionAuth.call(this);
+  },
   created() {
     this.fetchData();
   },
+  beforeDestroy() {
+    this.refersh = false
+    cacheCite.current?.()
+    closeFreezeFetch()
+  },
   methods: {
+    // 实时刷新触发和停止
+    refershChange(value) {
+      this.refersh = value
+      if (value) {
+        const fetchDataWithSetTimeOut = () => {
+          this.fetchData().then(() => {
+            const count = setTimeout(() => {
+              fetchDataWithSetTimeOut()
+            }, 3000)
+            cacheCite.current = () => {
+              clearTimeout(count)
+            }
+          })
+        } 
+        fetchDataWithSetTimeOut()
+      } else if(cacheCite.current) {
+        cacheCite.current()
+      }
+    },
+    // 数据请求参数更新
     updateParams(otherParams, resetPage) {
       const pageParams = {};
       if (resetPage) {
         pageParams.page = 1;
       }
       Object.assign(this.params, otherParams, pageParams);
-      this.fetchData(pageParams);
+      this.fetchData();
     },
+    // 数据请求
     fetchData() {
-      this.fetch(this.params).then(({ code, data }) => {
+      if (freeze) return Promise.resolve()
+     return this.fetch(this.params).then(({ code, data }) => {
         const { count, results } = data;
         this.total = count;
         this.dataSource = results || [];
       });
     },
+    // 关闭弹窗
+    close() {
+      this.type = ''
+      this.visible = false
+      closeFreezeFetch()
+    },
+    // 启用弹窗
+    open() {
+      if (this.refersh) {
+        useFreezeFetch()
+      }
+      this.visible = true
+    },
+    // 行新增
+    createClick() {
+      this.open()
+      this.type = 'create'
+      this.title = '创建'
+      this.okText = '提交'
+    },
+    // 行点击
     rowClick(row, event, column) {
       try {
-        this.$emit("row-click", row, event, column);
+        this.$emit("row-click", row, event, column );
       } catch {}
     },
+     // 行编辑
+    rowEdit(row, event, column) {
+      this.open()
+      this.type = 'edit'
+      this.title = '修改'
+      this.okText = '保存'
+    },
+    // 弹窗确认事件
+    okEffect (cb,res) {
+      if (this.type) {
+        const execResult = new Promise((r,j) => {
+          this.$emit(`${this.type}-handle`, res, (fetchResult) => {
+            fetchResult.then(r).catch(j)
+          })
+        }).then(() => {
+          this.$message({
+          showClose: true,
+          message: `${this.title}成功`,
+          type: 'success'
+          })
+          if (this.type === 'edit') {
+           this.fetchData()
+          } else if (this.type === 'create') {
+            this.updateParams({},true)
+          }
+          this.close()
+        })
+        cb(execResult)
+      }
+    },
+    // 行删除
+    rowDelete(row, event, column) {
+      useFreezeFetch()
+      const beforeClose = async (action, instance, done) => {
+        if (action === 'confirm') {
+          instance.confirmButtonLoading = true;
+          const res = await new Promise((r,j) => {
+            this.$emit("row-delete", row, event, column, (v) => {
+              v.then(r).catch((err) => {
+                instance.confirmButtonLoading = false;
+                j(err)
+              })
+            });
+          })
+          if (res) { 
+            done();
+          }
+          instance.confirmButtonLoading = false;
+        } else {
+          instance.confirmButtonLoading = false;
+          done();
+        }
+      }
+      try {
+        this.$alert('确定要进行删除操作吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          showClose: false,
+          showCancelButton:true,
+          type: 'warning',
+          center: true,
+          beforeClose
+        }).then(action => {
+          this.fetchData()
+          this.$message({
+          showClose: true,
+          message: '删除成功',
+          type: 'success'
+          });
+        }).finally(() => {
+          closeFreezeFetch()
+        })
+      } catch {}
+    }
   },
 };
 </script>
@@ -77,17 +231,23 @@ export default {
 <template>
   <el-container style="height: 100%; background: #fff; padding: 16px 24px">
     <el-header height="auto" style="padding: 0">
-      <table-header @updateParams="updateParams">
-        <template #HeaderLeft>
-          <slot name="HeaderLeft"></slot>
-        </template>
-      </table-header>
+      <table-header 
+        @updateParams="updateParams" 
+        :create="create" 
+        @create-click="createClick"
+        :refersh="refersh"
+        @refersh-change="refershChange"
+        :needRefersh="needRefersh"
+      ></table-header>
     </el-header>
     <el-main style="padding: 0">
       <table-main
+        :rowOperators="rowOperators"
         :tableColumns="tableColumns"
         :dataSource="dataSource"
         @row-click="rowClick"
+        @row-edit="rowEdit"
+        @row-delete="rowDelete"
       ></table-main>
     </el-main>
     <el-footer>
@@ -99,6 +259,14 @@ export default {
       ></table-footer>
     </el-footer>
     <slot></slot>
+    <form-modal
+      :visible="visible"
+      :title="title"
+      :okText="okText"
+      @close="close"
+      @okEffect="okEffect"
+      :schema="schema"
+    ></form-modal>
   </el-container>
 </template>
 

@@ -37,7 +37,7 @@ export default {
     FormButtonGroup,
     Button,
     Submit,
-    ...SchemaField,
+    SchemaField,
   },
 
   data() {

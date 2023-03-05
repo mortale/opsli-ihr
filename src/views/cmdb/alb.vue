@@ -1,6 +1,6 @@
 <script>
 import dayjs from "dayjs";
-import { getAlb } from "@/api/cmdb/alb";
+import { getAlb,postAlb,putAlb, deleteAlb } from "@/api/cmdb/alb";
 import TablePage from "./components/tablePage.vue";
 export default {
   name: "alb",
@@ -9,6 +9,17 @@ export default {
   },
   data() {
     return {
+      schema: {
+        type: "object",
+        properties: {
+          input: {
+            "x-component": "Input",
+            "x-decorator": "FormItem",
+            title: "input",
+          },
+        },
+      },
+      operators: ["create", 'refersh', "edit", "delete"],
       fetch: getAlb,
       tableColumns: [
         { label: "Zone", columnName: "zone", align: "center" },
@@ -35,20 +46,21 @@ export default {
             dayjs(cellValue).format("YYYY-M-D HH:mm:ss"),
           align: "center",
         },
-        {
-          label: "操作",
-          align: "center",
-          type: "operator",
-          operators: [ "edit","delete"],
-        },
       ],
     };
   },
   methods: {
-    editClick() {
-      console.log('edit')
+    createHandle: (data,callback) => {
+      const result =  postAlb(data)
+      callback(result);
     },
-    rowClick(row, column, event) {
+    editHandle: (data, callback) => {
+      const result = putAlb(data)
+      callback(result);
+    },
+    rowDelete: (row, event, column, callback) => {
+      const result = deleteAlb(row.row.id)
+      callback(result);
     },
   },
 };
@@ -57,14 +69,14 @@ export default {
 <template>
   <div style="height: 100%">
     <table-page
+      :operators="operators"
       :tableColumns="tableColumns"
       :fetch="fetch"
-      @row-click="rowClick"
-    >
-    <template #HeaderLeft>
-      <el-button type="primary" @click="toggleVisible">创建</el-button>
-    </template>
-    </table-page>
+      :schema="schema"
+      @create-handle="createHandle"
+      @edit-handle="editHandle"
+      @row-delete="rowDelete"
+    ></table-page>
   </div>
 </template>
 

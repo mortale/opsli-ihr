@@ -348,7 +348,7 @@ export default {
 
     sumbit() {
       this.form.submit().then((result) => {
-        postSprint(result).then((res) => {
+        !(result).then((res) => {
           if (res.code === 200) {
             this.closed();
           }
@@ -389,10 +389,8 @@ export default {
 
 <template>
   <div style="height: 100%">
+    <el-button type="primary" @click="open">创建</el-button>
     <table-page :tableColumns="tableColumns" :fetch="fetch">
-      <template #HeaderLeft>
-        <el-button type="primary" @click="open">创建</el-button>
-      </template>
 
       <el-dialog title="创建" :visible.sync="visible" @closed="closed">
         <FormProvider
@@ -405,7 +403,7 @@ export default {
         <template #footer>
           <span>
             <el-button @click="closed">取消</el-button>
-            <el-button type="primary" @click="sumbit">提交</el-button>
+            <el-button type="primmainary" @click="sumbit">提交</el-button>
           </span>
         </template>
       </el-dialog>

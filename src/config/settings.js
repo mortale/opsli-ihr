@@ -70,7 +70,7 @@ module.exports = {
   //最长请求时间 可能会有导入 会有较长时间损耗 这里暂时设定失效时间为20秒
   requestTimeout: 5000,
   //操作正常code，支持String、Array、int多种类型
-  successCode: [200, 0],
+  successCode: [200, 201, 0],
   //登录失效code
   invalidCode: 402,
   //行锁更新异常code

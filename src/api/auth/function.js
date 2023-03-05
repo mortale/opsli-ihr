@@ -1,35 +1,200 @@
 const data = {
-  "/dashboard": ["admin"],
-  "/cmdb": ["admin"],
-  "/cmdb/cloud": ["admin"],
-  "/cmdb/status": ["admin"],
-  "/cmdb/zone": ["admin"],
-  "/cmdb/environment": ["admin"],
-  "/cmdb/machine": ["admin"],
-  "/cmdb/modules": ["admin"],
-  "/cmdb/application": ["admin"],
-  "/cmdb/deployment": ["admin"],
-  "/cmdb/mix": ["admin"],
-  "/cmdb/archery": ["admin"],
-  "/cmdb/alb": ["admin"],
-  "/cmdb/clb": ["admin"],
-  "/cmdb/deployment-history": ["admin"],
-  "/cmdb/docker-version": ["admin"],
-  "/publish": ["admin"],
-  "/publish/mission": ["admin"],
-  "/publish/progress": ["admin"],
-  "/publish/jenkins-history": ["admin"],
-  "/publish/private-mission": ["admin"],
-  "/version": ["admin"],
-  "/version/todo-mission": ["admin"],
-  "/version/publish-order": ["admin"],
-  "/version/datafix": ["admin"],
-  "/version/app": ["admin"],
-  "/version/history": ["admin"],
-  "/version/management": ["admin"],
-  "/cmd": ["admin"],
-  "/monitor": ["admin"],
-  "/management": ["admin"],
+  "/dashboard": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/cloud": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/status": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/zone": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/environment": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/machine": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/modules": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/application": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/deployment": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/mix": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/archery": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/alb": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/clb": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/deployment-history": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmdb/docker-version": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/publish/mission": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/publish/progress": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/publish/jenkins-history": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/publish/private-mission": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/version/todo-mission": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/version/publish-order": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/version/datafix": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/version/app": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/version/history": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/version/management": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/cmd": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/monitor": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
+  "/management": {
+    admin: ["create", "edit", "delete"],
+    dev: ["create", "edit", "delete"],
+    test: ["create", "edit", "delete"],
+    it: ["create", "edit", "delete"],
+    ops: ["create", "edit", "delete"],
+  },
 };
 
 export function getBtnAuthList() {
@@ -41,3 +206,18 @@ export function getBtnAuthList() {
     data,
   });
 }
+
+export const getFunctionAuth = function () {
+  const currentAuths = data[this.$route.path] || {};
+  const roles = this.$baseAccessToken();
+  const auths = new Set();
+  roles.split(".").forEach((k) => {
+    const currentAuth = currentAuths[k];
+    if (Array.isArray(currentAuth) && currentAuth.length) {
+      currentAuth.forEach((auth) => {
+        auths.add(auth);
+      });
+    }
+  });
+  return Array.from(auths);
+};

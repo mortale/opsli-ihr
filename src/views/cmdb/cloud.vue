@@ -1,6 +1,6 @@
 <script>
 import dayjs from "dayjs";
-import { getCloud, postCloud } from "@/api/cmdb/cloud";
+import { getCloud, postCloud,putCloud,deleteCloud } from "@/api/cmdb/cloud";
 import TablePage from "./components/tablePage.vue";
 export default {
   name: "cloud",
@@ -9,6 +9,7 @@ export default {
   },
   data() {
     return {
+      operators: ["create", "edit", "delete"],
       fetch: getCloud,
       tableColumns: [
         { label: "名称", columnName: "name", align: "center" },
@@ -27,66 +28,45 @@ export default {
           align: "center",
         },
       ],
-      visible: false,
-      isLoading: false,
-      form: {
-        name: "",
-        update_order_id: "",
-      },
-      formRules: {
-        name: [{ required: true, message: "该字段必填", trigger: "blur" }],
-        update_order_id: [
-          { required: true, message: "该字段必填", trigger: "blur" },
-        ],
+      schema: {
+        type: "object",
+        properties: {
+          name: {
+            "x-component": "Input",
+            "x-decorator": "FormItem",
+            title: "name",
+          },
+        },
       },
     };
   },
   methods: {
-    toggleVisible() {
-      this.visible = !this.visible;
+    createHandle: (data,callback) => {
+      const result =  postCloud(data)
+      callback(result);
     },
-    async sumbit() {
-      const result = await this.$refs.form.validate();
-      if (result) {
-        postCloud(this.form).then((res) => {
-          if (res.code === 200) {
-            this.toggleVisible();
-          }
-        });
-      }
+    editHandle: (data, callback) => {
+      const result = putCloud(data)
+      callback(result);
+    },
+    rowDelete: (row, event, column, callback) => {
+      const result = deleteCloud(row.row.id)
+      callback(result);
     },
   },
 };
 </script>
 
 <template>
-  <table-page :tableColumns="tableColumns" :fetch="fetch">
-    <template #HeaderLeft>
-      <el-button type="primary" @click="toggleVisible">创建</el-button>
-    </template>
-    <el-dialog title="创建" :visible.sync="visible">
-      <el-form
-        :model="form"
-        ref="form"
-        label-position="left"
-        :rules="formRules"
-        label-width="25%"
-        @submit.native.prevent
-      >
-        <el-form-item label="名字" prop="name">
-          <el-input v-model="form.name" placeholder="请输入" />
-        </el-form-item>
-        <el-form-item label="update_order_id" prop="update_order_id">
-          <el-input v-model="form.update_order_id" placeholder="请输入" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <span>
-          <el-button @click="toggleVisible">取消</el-button>
-          <el-button type="primary" @click="sumbit">提交</el-button>
-        </span>
-      </template>
-    </el-dialog>
+  <table-page 
+  :operators="operators"
+  :tableColumns="tableColumns" 
+  :fetch="fetch"
+  :schema="schema"
+  @create-handle="createHandle"
+  @edit-handle="editHandle"
+  @row-delete="rowDelete"
+  >
   </table-page>
 </template>
 
