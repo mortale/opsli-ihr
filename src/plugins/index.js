@@ -11,10 +11,8 @@ import "./vabIcon";
 
 import Vab from "@/utils/vab";
 import { VabDrag, VabPermissions, VabQueryForm } from "@/layouts/components";
-import VabCount from "zx-count";
 
 Vue.use(Vab);
 Vue.use(VabPermissions);
 Vue.use(VabDrag);
 Vue.use(VabQueryForm);
-Vue.use(VabCount);

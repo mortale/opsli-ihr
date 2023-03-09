@@ -1,6 +1,5 @@
 <template>
   <div class="vue-admin-beautiful-wrapper" :class="classObj">
-    <div>111</div>
     <div
       v-if="'horizontal' === layout"
       class="layout-container-horizontal"
@@ -50,13 +49,12 @@
 </template>
 
 <script>
-  import { Ad, AppMain, NavBar, SideBar, TagsBar, TopBar } from "./components";
+  import { AppMain, NavBar, SideBar, TagsBar, TopBar } from "./components";
   import { mapActions, mapGetters } from "vuex";
   import { tokenName } from "@/config/settings";
   export default {
     name: "Layout",
     components: {
-      // Ad,
       TopBar,
       NavBar,
       SideBar,
