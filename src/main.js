@@ -3,8 +3,8 @@ import App from "./App";
 import $perms from "@/utils/perms";
 import $dict from "@/utils/dict";
 import $publicKey from "@/utils/publicKey";
-import store from "./store";
 import router from "./router";
+import store from "./store";
 import "./plugins";
 /**
  * @copyright chuzhixin 1204505056@qq.com
@@ -26,8 +26,7 @@ Vue.use($dict);
 Vue.use($publicKey);
 
 new Vue({
-  el: "#vue-admin-beautiful",
   router,
   store,
   render: (h) => h(App),
-});
+}).$mount("#app");

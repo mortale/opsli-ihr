@@ -30,7 +30,7 @@ npm run serve
  * @copyright chuzhixin 1204505056@qq.com
  * @description 全局变量配置
  */
-module.exports = {
+ = {
   // 开发以及部署时的URL
   publicPath: "",
   // 生产环境构建文件的目录名

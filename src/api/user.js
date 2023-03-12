@@ -1,8 +1,12 @@
 import request from "@/utils/request";
 import { urlAddArgsByData } from "@/utils";
-const { baseURL, baseOpsTestUrl } = require("@/config/settings");
 import { encryptedRsa } from "@/utils/crypto/encrypt-rsa";
-import { loginRSA, tokenName } from "@/config/settings";
+import {
+  loginRSA,
+  tokenName,
+  baseURL,
+  baseOpsTestUrl,
+} from "@/config/settings";
 import Vue from "vue";
 
 export async function login(data) {

@@ -3,9 +3,15 @@
  * @description 所有全局配置的状态管理，如无必要请勿修改
  */
 
-import defaultSettings from "@/config/settings";
+import {
+  tagsBar,
+  logo,
+  layout,
+  header,
+  themeBar,
+  skeleton,
+} from "@/config/settings";
 
-const { tagsBar, logo, layout, header, themeBar, skeleton } = defaultSettings;
 const theme =
   JSON.parse(localStorage.getItem("vue-admin-beautiful-theme")) || "";
 const state = {
