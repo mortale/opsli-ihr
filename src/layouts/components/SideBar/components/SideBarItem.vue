@@ -21,7 +21,7 @@
   import Submenu from "./Submenu";
   import MenuItem from "./MenuItem";
   import { isExternal } from "@/utils/validate";
-  import path from "path";
+  import path from "@/utils/path";
 
   export default {
     name: "SideBarItem",

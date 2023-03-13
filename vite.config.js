@@ -5,8 +5,9 @@ const path = require("path");
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
+    base: "./",
     optimizeDeps: {
-      include: ["screenfull"],
+      include: ["screenfull", "zx-icon"],
     },
     define: {
       "process.env": { ...env },
@@ -14,9 +15,15 @@ export default ({ mode }) => {
     plugins: [vue()],
     resolve: {
       extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-      },
+      alias: [
+        {
+          find: "@",
+          replacement: path.resolve(__dirname, "./src"),
+        },{
+          find:'~element-ui',
+          replacement: path.resolve(__dirname, "./node_modules/element-ui"),
+        }
+      ]
     },
     css: {
       preprocessorOptions: {
@@ -26,10 +33,13 @@ export default ({ mode }) => {
             if (
               relativePath.replace(/\\/g, "/") !== "src/styles/variables.scss"
             ) {
-              // if (relativePath.replace(/\\/g, "/").match(/@formily/)) {
-              //   return content;
+              // if (relativePath.replace(/\\/g, "/").match(/@formily\/element/)) {
+              //   return content
               // } else {
-              return `@import "/src/styles/variables.scss";` + content;
+                if(!content.includes(`@use`)) {
+                  return `@import "/src/styles/variables.scss";` + content;
+                }
+                return content
               // }
             }
             return content;
@@ -77,7 +87,7 @@ export default ({ mode }) => {
       //@rollup/plugin-commonjs 插件的选项
       commonjsOptions: {},
       //构建的库
-      lib: {},
+      // lib: {},
       //当设置为 true，构建后将会生成 manifest.json 文件
       manifest: false,
       // 设置为 false 可以禁用最小化混淆，

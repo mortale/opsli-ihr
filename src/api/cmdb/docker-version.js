@@ -1,6 +1,6 @@
 import request from "@/utils/request";
 import api, { headers } from "../api";
-const { baseOpsTestUrl } = require("@/config/settings");
+import { baseOpsTestUrl } from "@/config/settings";
 
 export function getDockerVersion(params) {
   return request({

@@ -1,6 +1,6 @@
 import { urlAddArgsByData } from "@/utils";
 import { isNull } from "@/utils/validate";
-const { tokenName, baseURL } = require("@/config/settings");
+import { tokenName, baseURL } from "@/config/settings";
 import { getAccessToken } from "@/utils/accessToken";
 
 /**

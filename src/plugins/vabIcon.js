@@ -1,4 +1,4 @@
 import Vue from "vue";
-import VabIcon from "zx-icon";
-
-Vue.component("vab-icon", VabIcon);
+const VabIcon = import.meta.globEager("../../node_modules/zx-icon");
+    console.log(VabIcon.default);
+Vue.component("vab-icon", VabIcon.default);

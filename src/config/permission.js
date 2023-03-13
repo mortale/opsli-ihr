@@ -62,6 +62,7 @@ router.beforeResolve(async (to, from, next) => {
             let asyncRoutes = await store.dispatch("routes/setAllRoutes");
             accessRoutes = deepClone([...constantRoutes, ...asyncRoutes]);
           }
+          console.log(accessRoutes)
           router.addRoutes(accessRoutes);
           next({ ...to, replace: true });
         } catch (err) {

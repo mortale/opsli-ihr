@@ -5,20 +5,24 @@ const dict = {
   1: true,
 };
 
+const layoutComponents = import.meta.glob("../layouts/*.vue");
+const viewsComponents = import.meta.glob("../views/**/*.vue");
+const AppModules = { ...layoutComponents, ...viewsComponents };
+
 /**
  * @copyright chuzhixin 1204505056@qq.com
  * @description all模式渲染后端返回路由
  * @param constantRoutes
  * @returns {*}
  */
+
 export function filterAllRoutes(constantRoutes) {
   return constantRoutes.filter((route) => {
     if (route.component) {
       if (route.component === "Layout") {
-        route.component = (resolve) => require(["@/layouts"], resolve);
+        route.component = AppModules["../layouts/index.vue"];
       } else if (route.component === "EmptyLayout") {
-        route.component = (resolve) =>
-          require(["@/layouts/EmptyLayout"], resolve);
+        route.component = AppModules["../layouts/EmptyLayout.vue"];
       } else {
         let path = "views/" + route.component;
         if (
@@ -33,7 +37,7 @@ export function filterAllRoutes(constantRoutes) {
         } else {
           path = "views/" + route.component;
         }
-        route.component = (resolve) => require([`@/${path}`], resolve);
+        route.component = AppModules[`../${path}.vue`];
       }
     }
     if (route.children && route.children.length) {

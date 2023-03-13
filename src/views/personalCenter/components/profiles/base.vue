@@ -170,7 +170,6 @@
   import { doUpdateSelf } from "@/api/system/user/userManagement";
   import AvatarEdit from "../AvatarEdit";
   import { mapGetters } from "vuex";
-  const { baseURL } = require("@/config/settings");
 
   export default {
     name: "PersonalCenterBase",

@@ -45,7 +45,7 @@
 
 <script>
   import SideBarItem from "../SideBar/components/SideBarItem";
-  import variables from "@/styles/variables.scss";
+  import variables from "@/styles/variables.module.scss";
   import { mapGetters } from "vuex";
   import {
     Avatar,
@@ -54,7 +54,6 @@
     Logo,
     ThemeBar,
   } from "@/layouts/components";
-
   export default {
     components: {
       Avatar,
@@ -66,6 +65,7 @@
     },
     data() {
       return {
+        variables,
         pulse: false,
         menuTrigger: "hover",
       };
@@ -82,9 +82,6 @@
           return meta.activeMenu;
         }
         return path;
-      },
-      variables() {
-        return variables;
       },
     },
     methods: {

@@ -25,7 +25,7 @@
 <script>
   import { Logo } from "@/layouts/components";
   import SideBarItem from "./components/SideBarItem";
-  import variables from "@/styles/variables.scss";
+  import variables from "@/styles/variables.module.scss";
   import { mapGetters } from "vuex";
   import { defaultOopeneds, uniqueOpened } from "@/config/settings";
 
@@ -34,6 +34,7 @@
     components: { SideBarItem, Logo },
     data() {
       return {
+        variables,
         uniqueOpened,
       };
     },
@@ -54,9 +55,6 @@
           return meta.activeMenu;
         }
         return path;
-      },
-      variables() {
-        return variables;
       },
     },
   };
