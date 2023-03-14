@@ -30,7 +30,6 @@ export default {
     FormModal
   },
   data() {
-
   const _operators = this.operators ?? []
   const create =this.auths.includes('create') &&  _operators.includes('create')
   const rowOperators = _operators.filter((el) => this.auths.includes(el) && el !== 'create')

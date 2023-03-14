@@ -26,11 +26,19 @@ export default ({ mode }) => {
         {
           find: "@",
           replacement: path.resolve(__dirname, "./src"),
-        },{
-          find:'~element-ui',
+        },
+        {
+          find: /^vue$/,
+          replacement: path.resolve(
+            __dirname,
+            "./node_modules/vue/dist/vue.runtime.esm.js"
+          ),
+        },
+        {
+          find: "~element-ui",
           replacement: path.resolve(__dirname, "./node_modules/element-ui"),
-        }
-      ]
+        },
+      ],
     },
     css: {
       preprocessorOptions: {
@@ -43,10 +51,10 @@ export default ({ mode }) => {
               // if (relativePath.replace(/\\/g, "/").match(/@formily\/element/)) {
               //   return content
               // } else {
-                if(!content.includes(`@use`)) {
-                  return `@import "/src/styles/variables.scss";` + content;
-                }
-                return content
+              if (!content.includes(`@use`)) {
+                return `@import "/src/styles/variables.scss";` + content;
+              }
+              return content;
               // }
             }
             return content;
@@ -59,17 +67,10 @@ export default ({ mode }) => {
       port: 80,
       hmr: true,
       force: true,
-      open: false,
+      open: true,
       proxy: {
-        "/api/login": {
-          target: "https://ops-test.ihr360.com/",
-          secure: false,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/ops-test/, ""),
-        },
-        "/api-v2": {
-          target: "https://ops-test.ihr360.com/",
-          secure: false,
+        "/ops-test": {
+          target: "https://ops-test.ihr360.com",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/ops-test/, ""),
         },

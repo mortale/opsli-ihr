@@ -6,7 +6,7 @@
       tableColumns: Array,
       rowOperators: Array,
     },
-    data() {
+  data() {
       return {
         innerOperators: {
           edit: {
