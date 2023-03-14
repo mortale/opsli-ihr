@@ -57,10 +57,10 @@ export default ({ mode }) => {
     },
     server: {
       host: true,
-      open: true,
       port: 80,
       hmr: true,
       force: true,
+      open: false,
       proxy: {
         "/api/login": {
           target: "https://ops-test.ihr360.com/",

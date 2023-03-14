@@ -62,6 +62,9 @@ export default {
       const result = deleteAlb(row.row.id)
       callback(result);
     },
+    createInitialValues(row) {
+      return {input:'111'}
+    }
   },
 };
 </script>
@@ -73,6 +76,7 @@ export default {
       :tableColumns="tableColumns"
       :fetch="fetch"
       :schema="schema"
+      :createInitialValues="createInitialValues"
       @create-handle="createHandle"
       @edit-handle="editHandle"
       @row-delete="rowDelete"

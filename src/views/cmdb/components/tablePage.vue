@@ -21,6 +21,7 @@ export default {
     tableColumns: Array,
     operators: Array,
     schema: Object,
+    createInitialValues: Function
   },
   components: {
     TableHeader,
@@ -134,6 +135,18 @@ export default {
       this.type = 'edit'
       this.title = '修改'
       this.okText = '保存'
+      try{
+        // this.$refs.formDialog.loadingContent(true)
+        Promise.resolve(this.createInitialValues?.(row)).then((res) => {
+          if (res) {
+            this.$refs.formDialog.setInitialValues(res)
+          }
+      }).finally(() => {
+        // this.$refs.formDialog.loadingContent(false)
+      })
+    } catch (err) {
+        console.error('手动捕获',err)
+    } 
     },
     // 弹窗确认事件
     okEffect (cb,res) {
@@ -260,6 +273,7 @@ export default {
     </el-footer>
     <slot></slot>
     <form-modal
+      ref="formDialog"
       :visible="visible"
       :title="title"
       :okText="okText"

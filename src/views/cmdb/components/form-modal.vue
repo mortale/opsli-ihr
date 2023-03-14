@@ -64,6 +64,7 @@ export default {
         close() {
             if (!this.loading) {
                 this.$emit('close')
+                form.reset()
             }
         },
         onOk() {
@@ -77,7 +78,10 @@ export default {
                 this.$emit('okEffect', callback ,result)
             })
          
-        }
+        },
+        setInitialValues (values) {
+          form.setValues(values)
+        },
   }
 }
 </script>
