@@ -8,7 +8,6 @@ export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   const time = dayjs().format("YYYY-M-D HH:mm:ss");
   return defineConfig({
-    base: "./",
     optimizeDeps: {
       include: ["screenfull"],
     },

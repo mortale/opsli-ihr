@@ -57,7 +57,7 @@
     "screenfull": "^5.0.2",
     "sortablejs": "^1.12.0",
     "vite-plugin-glob": "^0.3.2",
-    "vue": "^2.6.12",
+    "vue": "2.7.14",
     "vue-amap": "^0.5.10",
     "vue-echarts": "^5.0.0-beta.0",
     "vue-qart": "^2.2.0",
