@@ -1,16 +1,25 @@
 import { defineConfig, loadEnv } from "vite";
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { createVuePlugin as vue } from "vite-plugin-vue2";
+import dayjs from 'dayjs'
 const path = require("path");
+const { version, author } = require("./package.json");
 
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
+  const time = dayjs().format("YYYY-M-D HH:mm:ss");
   return defineConfig({
     base: "./",
     optimizeDeps: {
-      include: ["screenfull", "zx-icon"],
+      include: ["screenfull"],
     },
     define: {
-      "process.env": { ...env },
+      "process.env": {
+        ...env,
+        VUE_APP_AUTHOR: "1204505056@qq.com",
+        VUE_APP_VERSION: version,
+        VUE_APP_UPDATE_TIME: time,
+      },
     },
     plugins: [vue()],
     resolve: {

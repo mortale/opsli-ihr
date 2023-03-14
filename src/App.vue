@@ -1,6 +1,5 @@
 <template>
   <div id="vue-admin-beautiful" style="height: inherit">
-    222
     <router-view />
   </div>
 </template>

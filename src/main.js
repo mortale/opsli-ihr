@@ -26,7 +26,8 @@ Vue.use($dict);
 Vue.use($publicKey);
 
 new Vue({
+  el:'#app',
   router,
   store,
   render: (h) => h(App),
-}).$mount("#app");
+})
