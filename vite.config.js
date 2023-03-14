@@ -1,5 +1,4 @@
 import { defineConfig, loadEnv } from "vite";
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { createVuePlugin as vue } from "vite-plugin-vue2";
 import dayjs from 'dayjs'
 const path = require("path");
