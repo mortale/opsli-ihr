@@ -5,10 +5,10 @@
       dataSource: Array,
       tableColumns: Array,
       rowOperators: Array,
+      customOperators: Object,
     },
   data() {
-      return {
-        innerOperators: {
+    const defaultOperators = {
           edit: {
             click: this.editClick,
           },
@@ -16,7 +16,11 @@
             type: "danger",
             click: this.deleteClick,
           },
-        },
+    }
+    const innerOperators = Object.assign({}, defaultOperators, this.customOperators)
+    console.log(innerOperators)
+      return {
+        innerOperators
       };
     },
     methods: {

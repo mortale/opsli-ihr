@@ -30,11 +30,28 @@ export default {
     FormModal
   },
   data() {
-  const _operators = this.operators ?? []
-  const create =this.auths.includes('create') &&  _operators.includes('create')
-  const rowOperators = _operators.filter((el) => this.auths.includes(el) && el !== 'create')
-  const needRefersh = _operators.includes('refersh')
+    const _operators = new Set(this.operators ?? [])
+
+  const create =this.auths.includes('create') &&  _operators.has('create')
+  const needRefersh = _operators.has('refersh')
+  // 无操作列表头
+  const tableColumnsWithNoOperators = this.tableColumns.filter((el) => el.type !== 'operator')
+  // 操作列表头
+    const customOperatorColumn = this.tableColumns.find((el) => el.type === 'operator')
+
+    const customOperators = customOperatorColumn?.operators?.reduce((acc, next) => {
+      const { key, click } = next
+      _operators.add(key)
+      acc[key] = {
+        click
+      }
+      return acc
+    }, {})
+
+  const rowOperators = Array.from(_operators).filter((el) => this.auths.includes(el) && el !== 'create')
     return {
+      tableColumnsWithNoOperators,
+      customOperators: customOperators ?? {},
       auths: [],
       needRefersh,
       refersh:false,
@@ -255,7 +272,8 @@ export default {
     <el-main style="padding: 0">
       <table-main
         :rowOperators="rowOperators"
-        :tableColumns="tableColumns"
+        :tableColumns="tableColumnsWithNoOperators"
+        :customOperators="customOperators"
         :dataSource="dataSource"
         @row-click="rowClick"
         @row-edit="rowEdit"
