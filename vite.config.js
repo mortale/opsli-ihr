@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import { createVuePlugin as vue } from "vite-plugin-vue2";
-import dayjs from 'dayjs'
+
+import dayjs from "dayjs";
 const path = require("path");
 const { version, author } = require("./package.json");
 
@@ -19,7 +20,11 @@ export default ({ mode }) => {
         VUE_APP_UPDATE_TIME: time,
       },
     },
-    plugins: [vue()],
+    plugins: [
+      vue({
+        jsx: true,
+      }),
+    ],
     resolve: {
       extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
       alias: [

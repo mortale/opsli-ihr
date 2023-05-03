@@ -1,4 +1,4 @@
-<script>
+<script lang="jsx">
 import dayjs from "dayjs";
 import {
   getApplication,
@@ -27,6 +27,11 @@ export default {
           label: "Prometheus_url",
           columnName: "prometheus_url",
           align: "center",
+          type: 'slots',
+          minWidth:'200px',
+          render: (h,data) => {
+            return data.row.prometheus_url ?<el-button>{data.row.prometheus_url}</el-button>:''
+          }
         },
         { label: "Online", columnName: "status", align: "center" },
         { label: "Lb", columnName: "lb_status", align: "center" },
@@ -64,6 +69,7 @@ export default {
   },
   methods: {
     editClick(rowData) {
+    console.log(rowData)
       this.dialogTitle = "修改";
       Object.assign(this.form, {
         name: rowData.row.name,
